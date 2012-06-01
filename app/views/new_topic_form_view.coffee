@@ -16,8 +16,27 @@ module.exports = class NewTopicFormView extends FormView
     @delegate 'keyup keydown', '.new-topic-form-text', @changeText
 
   toggleFields: (event) =>
-    $(event.currentTarget).toggleClass('active')
-    @$('.new-topic-form-fields').toggleClass('visible')
+    @toggled = not @toggled
+    @$fields = @$('.new-topic-form-fields')
+    if @toggled
+      $(event.currentTarget).addClass('active')
+      @$fields.removeClass('hidden')
+      @$fields.addClass('bounceInDown')
+    else
+      @$(event.currentTarget).removeClass('active')
+      @$fields.addClass('bounceOutUp')
+
+  render: ->
+    super
+    @$fields = @$('.new-topic-form-fields')
+    @$fields.on 'webkitAnimationFrame', =>
+      console.log 1488
+    @$fields.on 'webkitAnimationEnd', =>
+      if @toggled
+        @$fields.removeClass('bounceInDown')
+      else
+        @$fields.removeClass('bounceOutUp')
+        @$fields.addClass('hidden')
 
   changeTitle: (event) =>
     return unless event.currentTarget.validity.valid

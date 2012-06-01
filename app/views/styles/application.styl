@@ -22,16 +22,17 @@ nav-button()
   margin: 9px 0
 
 slide-down($slided-height, $duration, $type = ease-in)
-  height: 0
-  opacity: 0
-  transition: height $duration $type, visibility $duration $type, opacity $duration $type
-  input, textarea
-    display: none
-  &.visible
-    height: $slided-height
-    opacity: 1
-    input, textarea
-      display: inline
+  width: auto
+  // height: 0
+  // opacity: 0
+  // transition: height $duration $type, visibility $duration $type, opacity $duration $type
+  // input, textarea
+  //   display: none
+  // &.visible
+  //   height: $slided-height
+  //   opacity: 1
+  //   input, textarea
+  //     display: inline
 
 .spinner
   width: 24px
@@ -137,7 +138,12 @@ textarea:disabled
 
 .new-topic-form
   &-fields
-    slide-down(311px, ease-in, 0.3s)
+    transition: max-height 0.2s ease-in
+    animation-duration: 0.5s
+    // animation-delay: 0.2s
+    animation-timing-function: ease
+    animation-fill-mode: both
+    // slide-down(311px, ease-in, 0.3s)
     &.visible
       padding-bottom: 10px
   &-toggle-fields-button
